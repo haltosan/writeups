@@ -1,9 +1,0 @@
-"date","name","severity","service","target","desc","data","refs","hostnames"
-"5/24/2019","ssh-hostkey","info","(22/tcp) ssh","192.168.1.6","
-  2048 d6:01:90:39:2d:8f:46:fb:03:86:73:b3:3c:54:7e:54 (RSA)
-  256 f1:f3:c0:dd:ba:a4:85:f7:13:9a:da:3a:bb:4d:93:04 (ECDSA)
-  256 12:e2:98:d2:a3:e7:36:4f:be:6b:ce:36:6b:7e:0d:9e (ED25519)","","",""
-"5/24/2019","http-server-header","info","(80/tcp) http","192.168.1.6","Apache/2.4.18 (Ubuntu)
-Output: 
-None: Apache/2.4.18 (Ubuntu)","","",""
-"5/24/2019","http-title","info","(80/tcp) http","192.168.1.6","Site doesn't have a title (text/html).","","",""
