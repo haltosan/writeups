@@ -1,3 +1,10 @@
 The ssh vector was not successful. 
-I discovered the host using Nmap ping sweep (nmap -sn 192.168.1.0/24). The ip was 192.168.1.6. Next, I found the services using Nmap’s aggressive scan (nmap -A 192.168.1.6). The attack I tried was a password brute force. I used the fasttrack wordlist with hydra against the user marlinspike, the current user (hydra -l marlinspike -P /usr/share/wordlists/fasttrack.txt 192.168.1.6 ssh -t 4), but the attack did not prove successful. I also ran through all Linux/Unix ssh exploits in Metasploit and individually tried each. None of these worked either. This vector was not a very long or hard attack, but sadly did not work.
-The results were stored in Faraday, and then exported in the Faraday-SR-basic-1.csv file. This was also my first time using Faraday, and I very much enjoyed the result exporting and command history. I hope to use Faraday more in the future.
+I discovered the host using Nmap ping sweep (nmap -sn 192.168.1.0/24). The ip was 192.168.1.6. Next, I found the services
+using Nmap’s aggressive scan (nmap -A 192.168.1.6). The attack I tried was a password brute force. I used the fasttrack
+wordlist with hydra against the user marlinspike, the current user (hydra -l marlinspike -P /usr/share/wordlists/fasttrack.txt
+192.168.1.6 ssh -t 4), but the attack did not prove successful. I also ran through all Linux/Unix ssh exploits in Metasploit
+and individually tried each. None of these worked either. This vector was not a very long or hard attack, but sadly did not
+work.
+
+The results were stored in Faraday, and then exported in the Faraday-SR-basic-1.csv file. This was also my first time using
+Faraday, and I very much enjoyed the result exporting and command history. I hope to use Faraday more in the future.
