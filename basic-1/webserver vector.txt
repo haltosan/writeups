@@ -1,0 +1,8 @@
+This is my writeup for the ctf box. I was on an isolated network, so there was only a few devices. Host discovery was simple.
+I ran an nmap ping sweep (nmap -sn 192.168.1.1/24). Then an aggressive scan (nmap -A 192.168.1.2) and found port 80 was open.
+The website was very boring, so I ran Golismero to find any hidden pages or clear vulnerabilities. This gave nothing cool, so
+I ran nikto to find something. This returned the '/secret' page. This showed a wp site running, so I ran wp-scan. This gave me a 
+directory listing, with NOTHING in it. The '/admin' page did give a login. I tried several passwords, and was about to pass it to
+hydra, but 'admin' 'admin' worked. I passed the creds to metasploit and got a php shell upload. The session wasn't root auth, so 
+I ran several priv esc modules on it untill... BINGO we have root. This ends the challenge. A better version of the writeup is 
+elsewhere, I'm just trying to clean it up at the moment.
