@@ -1,1 +1,7 @@
-The ftp vector was very simple
+The ftp vector was very simple. The device was descovered with an nmap ping sweep (nmap -sn 192.168.1.1/24). Next,
+the device was scanned with nmap's aggressive scan (nmap -A 192.168.1.6). This found the ftp service. When the host
+was scanned in Armitage (via the hail marry), the ftp service was descovered to have a backdoor. I sent this result to Metasploit
+(I don't like the shell interaction within Armitage), and got a shell on the system. I was able to cd to the root directory, 
+and write and read files.
+This vector was very very simple, and required very little knowledge of the tools. The backdoor had root priv, so I didn't even
+have to do a priv esc. This vector was also the simplest of the 3 I found (others being webserver and ssh).
