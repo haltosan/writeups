@@ -1,0 +1,8 @@
+"date","name","severity","service","target","desc","data","refs","hostnames"
+"6/13/2019","http-generator","info","(80/tcp) http","192.168.1.5","Joomla! - Open Source Content Management","","",""
+"6/13/2019","http-server-header","info","(80/tcp) http","192.168.1.5","Apache/2.4.18 (Ubuntu)
+Output: 
+None: Apache/2.4.18 (Ubuntu)","","",""
+"6/13/2019","http-title","info","(80/tcp) http","192.168.1.5","Home
+Output: 
+title: Home","","",""
