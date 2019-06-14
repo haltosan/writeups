@@ -1,13 +1,36 @@
-The DC-3 challenge box from vulnhub can be downloaded from the zip file. I had a little bit of challenge setting the virtual machine up (I've never had this issue before, so this was odd), but I found the ip of the machine as '192.168.1.5'. I got this from an nmap ping sweep (nmap -sn [SUBNET]). I then used an nmap aggressive scan (nmap -A [HOST]) to find out the services it was running. The results can be seen in the 'Faraday-SR-dc-3.csv' file.
+The DC-3 challenge box from vulnhub can be downloaded from the zip file. I had a little bit of challenge setting the virtual 
+machine up (I've never had this issue before, so this was odd), but I found the ip of the machine as '192.168.1.5'. I got this 
+from an nmap ping sweep (nmap -sn [SUBNET]). I then used an nmap aggressive scan (nmap -A [HOST]) to find out the services it was 
+running. The results can be seen in the 'Faraday-SR-dc-3.csv' file.
 
-The scan showed that the machine was running a webserver, the only vector on the machine. The server was also using 'joomla!'. I ran joomscan to find the version and look up the service and version in 'searchsploit'. This gave only one vulnerability to use: an sql injection point. 
+The scan showed that the machine was running a webserver, the only vector on the machine. The server was also using 'joomla!'. I 
+ran joomscan to find the version and look up the service and version in 'searchsploit'. This gave only one vulnerability to use: an
+sql injection point. 
 
-sqlmap was my tool of choice to attack this vulnerability. The results can be seen in the 'sqlmap dump.txt' file. The table and column data allowed me to find the username password pair: 'admin : $2y$10$DpfpYjADpejngxNh9GnmCeyIHCWpL97CVRnGeZsVJwR0kWFlfB1Zu '.At first I had trouble identifying the hash using hashID and md5hashing.net, but just blindly sending it off to 'john' worked (with the rockyou.txt wordlist). I found out the password was 'snoopy' from john.
+sqlmap was my tool of choice to attack this vulnerability. The results can be seen in the 'sqlmap dump.txt' file. The table and 
+column data allowed me to find the username password pair: 'admin : $2y$10$DpfpYjADpejngxNh9GnmCeyIHCWpL97CVRnGeZsVJwR0kWFlfB1Zu '. 
+At first I had trouble identifying the hash using hashID and md5hashing.net, but just blindly sending it off to 'john' worked (with
+the rockyou.txt wordlist). I found out the password was 'snoopy' from john.
 
-I then logged into the webserver found out at the start (on http://[HOST]/administator) with the found creds. After frantically looking for a point to upload a webshell, I finally found the template section. I uploaded the 'shell.php' file (after editing the payload a bit), and got the shell to run with the url http://[HOST]/templates/protostar/shell.php and a netcat listener (nc -lvp [PORT]).
+I then logged into the webserver found out at the start (on http://[HOST]/administator) with the found creds. After frantically 
+looking for a point to upload a webshell, I finally found the template section. I uploaded the 'shell.php' file (after editing the 
+payload a bit), and got the shell to run with the url http://[HOST]/templates/protostar/shell.php and a netcat listener (nc -lvp 
+[PORT]).
 
-I tried to get metasploit priv esc modules to work on the session once I used the metasploit listener, but these have never worked for me in the past or now. I went back to 'searchsploit' to find a working priv esc. I had a bit of trouble finding an area that I was able to upload files, but the tmp directory worked fine. I had to chmod each file after upload to run them though. After uploading about 20 c files to see if even 1 would work, I finally got to the '39772.zip' from exploitdb, and after running each part, I got root.
+I tried to get metasploit priv esc modules to work on the session once I used the metasploit listener, but these have never worked 
+for me in the past or now. I went back to 'searchsploit' to find a working priv esc. I had a bit of trouble finding an area that I 
+was able to upload files, but the tmp directory worked fine. I had to chmod each file after upload to run them though. After 
+uploading about 20 c files to see if even 1 would work, I finally got to the '39772.zip' from exploitdb, and after running each 
+part, I got root.
 
-I learned several important things from this challenge. First, 'searchsploit' should always be my first stop for finding vulnerabilities. It always gave me exactly what I needed without the long wait you get from a freshly started metasploit. Second, there is always (almost) a tool that scans the exact service you need scanned. I had to look through the tool list for kali to even find out that joomscan existed. I had used the other tools in the past, but this new one was perfect.
+I learned several important things from this challenge. First, 'searchsploit' should always be my first stop for finding 
+vulnerabilities. It always gave me exactly what I needed without the long wait you get from a freshly started metasploit. Second, 
+there is always (almost) a tool that scans the exact service you need scanned. I had to look through the tool list for kali to even
+find out that joomscan existed. I had used the other tools in the past, but this new one was perfect.
 
-I did fall down several rabbit holes. First, as soon as I saw the login for the website ('page.png'), I instantly thought of bruteforcing it. The page had stated "admin" made it, so I knew the username. I got the post form from 'Burp' and was about to send it to 'hydra', but I stopped myself because 'searchsploit' came to mind. Second, I looked way too far into the website. I have never really done much with webapps, so I was sort of trying to find everything I could. I was doing deep analyzing of random files I had gotten from a directory listing. I also started to dissect the javascript to find some sort of hidden clues. There were other small holes, but those cost me the most time.
+I did fall down several rabbit holes. First, as soon as I saw the login for the website ('page.png'), I instantly thought of 
+bruteforcing it. The page had stated "admin" made it, so I knew the username. I got the post form from 'Burp' and was about to send
+it to 'hydra', but I stopped myself because 'searchsploit' came to mind. Second, I looked way too far into the website. I have 
+never really done much with webapps, so I was sort of trying to find everything I could. I was doing deep analyzing of random 
+files I had gotten from a directory listing. I also started to dissect the javascript to find some sort of hidden clues. There were
+other small holes, but those cost me the most time.
