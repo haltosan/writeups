@@ -1,0 +1,26 @@
+This was the sputnik challenge from vulnhub. The initial recon showed very few services, and all web-based (as seen in the faraday
+report). The first thing that caught my attention was the git repo found (nmap was excited too: "GIT REPO FOUND!"), but I decided 
+to check out other vectors first. I ran every exploit on exploitdb against the splunk service and the apache running, but none of 
+the scripts worked. Finally, I moved over to the git repo.
+
+The git repo had a dir listing (at host:55555/.git/) that led me to the location of the repo at /log/refs/heads/master. I cloned 
+project and looked through the 'git log' for removed files. I did this to see if any files were trying to be hidden. This didn't 
+lead me to anything, but I did stumble accros a commit that gave creds ("sputnik : ameer_says_thank_you_and_good_job") in a file 
+called 'secret'.
+
+These creds could be for anything, but because I ran so many exploits at the splunk service, I tried the creds there. I had to do 
+some guessing for the port for the splunk login (it did not match the nmap results). Eventually, I tried the creds and they gave me 
+the admin pannel! From here I looked around for an application or file upload. I uploaded data thinking I could push a webshell, but 
+that was very wrong. The application portion was just what I needed though. I used a github project to do just what I needed: 
+https://github.com/TBGSecurity/splunk_shells After uploading the app, I got the ability to use a reverse shell.
+
+The user shell I was given was a 'dumb' shell (not tty). This was easily the most annoying part of the challenge. After struggling 
+to use the scripts from exploitdb for priv esc, I decided to upgrade the shell. This wasn't able to be done with pty (in python), 
+but rather done in a roundabout way. I made a metasploit shell in python, executed it on the 'dumb' shell, then upgraded it. From 
+here I tried the creds I got earlier (not seriously) and it worked! I got the root shell (I needed to spawn bash again though) and 
+finished the challenge.
+
+What I learned from this challenge is the beauty of the community of developers. The splunk app was way too much for me to make 
+for this challenge, and it worked perfectly (unlike SOME exploitdb scripts). I also learned how to get past the stupidity of a 
+'dumb' shell. This was, again, one of the hardest parts. It was far too weak on it's own to complete the challenge (su doesn't work 
+without tty) and it just looks and works better upgraded.
