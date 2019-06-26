@@ -9,7 +9,7 @@ lead me to anything, but I did stumble accros a commit that gave creds ("sputnik
 called 'secret'.
 
 These creds could be for anything, but because I ran so many exploits at the splunk service, I tried the creds there. I had to do 
-some guessing for the port for the splunk login (it did not match the nmap results). Eventually, I tried the creds and they gave me 
+some guessing for the port for the splunk login (it did not match the nmap results). Eventually, I tried the creds, and they gave me 
 the admin pannel! From here I looked around for an application or file upload. I uploaded data thinking I could push a webshell, but 
 that was very wrong. The application portion was just what I needed though. I used a github project to do just what I needed: 
 https://github.com/TBGSecurity/splunk_shells After uploading the app, I got the ability to use a reverse shell.
@@ -22,5 +22,7 @@ finished the challenge.
 
 What I learned from this challenge is the beauty of the community of developers. The splunk app was way too much for me to make 
 for this challenge, and it worked perfectly (unlike SOME exploitdb scripts). I also learned how to get past the stupidity of a 
-'dumb' shell. This was, again, one of the hardest parts. It was far too weak on it's own to complete the challenge (su doesn't work 
+'dumb' shell. This was, again, one of the hardest parts. It was far too weak on its own to complete the challenge (su doesn't work 
 without tty) and it just looks and works better upgraded.
+
+The failed attempts throughout the challenge are in the 'priv' dir.
