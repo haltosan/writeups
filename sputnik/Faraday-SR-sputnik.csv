@@ -1,0 +1,23 @@
+"date","name","severity","service","target","desc","data","refs","hostnames"
+"6/26/2019","http-robots.txt","info","(8089/tcp) http","192.168.1.5","1 disallowed entry 
+/","","",""
+"6/26/2019","http-server-header","info","(8089/tcp) http","192.168.1.5","Splunkd
+Output: 
+None: Splunkd","","",""
+"6/26/2019","http-title","info","(8089/tcp) http","192.168.1.5","splunkd
+Output: 
+title: splunkd","","",""
+"6/26/2019","ssl-cert","info","(8089/tcp) http","192.168.1.5","Subject: commonName=SplunkServerDefaultCert/organizationName=SplunkUser
+Not valid before: 2019-03-29T11:03:21
+Not valid after:  2022-03-28T11:03:21","","",""
+"6/26/2019","http-git","info","(55555/tcp) http","192.168.1.5","
+  192.168.1.5:55555/.git/
+    Git repository found!
+    Repository description: Unnamed repository; edit this file 'description' to name the...
+","","",""
+"6/26/2019","http-server-header","info","(55555/tcp) http","192.168.1.5","Apache/2.4.29 (Ubuntu)
+Output: 
+None: Apache/2.4.29 (Ubuntu)","","",""
+"6/26/2019","http-title","info","(55555/tcp) http","192.168.1.5","Flappy Bird Game
+Output: 
+title: Flappy Bird Game","","",""
