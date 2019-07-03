@@ -1,0 +1,11 @@
+# Nmap 7.70 scan initiated Wed Jul  3 20:40:29 2019 as: nmap -p1-65535 -oN portscan.txt 192.168.1.4
+Nmap scan report for 192.168.1.4
+Host is up (0.0084s latency).
+Not shown: 65532 closed ports
+PORT     STATE SERVICE
+21/tcp   open  ftp
+1515/tcp open  ifor-protocol
+3535/tcp open  ms-la
+MAC Address: A0:88:B4:3C:03:08 (Intel Corporate)
+
+# Nmap done at Wed Jul  3 20:40:52 2019 -- 1 IP address (1 host up) scanned in 22.64 seconds
