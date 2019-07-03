@@ -1,28 +1,28 @@
 This is the pumpkin garden box from vulnhub, first of the mission pumpkin series.
-The initial recon (nmap agro scan) showed only an ftp service. I found the version and the anonymous login. The anon login only got 
-me a file called note.txt. The file only contained
+The initial recon (nmap agro scan) showed only an ftp service. I found the version and the anonymous login. The anon login only 
+got me a file called note.txt. The file only contained
 "
 Hello Dear!
 Looking for route map to PumpkinGarden? I think jack can help you find it.
 "
-This looked like a reference to john the ripper (from jack the ripper), so I searched everything else on the ftp server. I couldn't 
-find another file that was readable, so I tryed other exploitaion. No exploit-db scripts were for the correct vsftpd version, and I 
-couldn't find a working cve either. I even tried an Armitage hail marry attack, but this didn't work. I lastly tried bruteforcing 
-creds on the ftp server, but this got me nowhere.
+This looked like a reference to john the ripper (from jack the ripper), so I searched everything else on the ftp server. I 
+couldn't find another file that was readable, so I tried other exploitaton. No exploit-db scripts were for the correct vsftpd 
+version, and I couldn't find a working cve either. I even tried an Armitage hail marry attack, but this didn't work. I lastly 
+tried bruteforcing creds on the ftp server, but this got me nowhere.
 
 I retried enumeration, in case I missed something. After a full port scan, I found 2 more services: a webserver, and ssh. The 
-webserver had a commented note in the index.html hinting at the images. This led me to find a directory listing (these have always 
-been rabbit holes in the past) and led me to a 'hidden_secret' dir, holding a file with what must be the hash needed from before. 
-I attempted to discover what hash type it was, as well as blindly running it through hashcat and john, but in the end it was base64 
-encoded. I gave credentials for the account 'scarecrow' (and a really strong, random password).
+webserver had a commented note in the index.html hinting at the images. This led me to find a directory listing (these have 
+always been rabbit holes in the past) and led me to a 'hidden_secret' dir, holding a file with what must be the hash needed from 
+before. I attempted to discover what hash type it was, as well as blindly running it through hashcat and john, but in the end it 
+was base64 encoded. I gave credentials for the account 'scarecrow' (and a really strong, random password).
 
-The creds worked for ftp. This actually gave us permission to change directory (but really limited). Moving to the user's home dir, 
-we find a note file. This contained
+The creds worked for ftp. This actually gave us permission to change directory (but really limited). Moving to the user's home 
+dir, we find a note file. This contained
 "
 Oops!!! I just forgot; keys to the garden are with LordPumpkin(ROOT user)! 
 Reach out to goblin and share this "Y0n$M4sy3D1t" to secretly get keys from LordPumpkin.
 "
-This is annother cred! I tried this on ssh and ftp, but it only worked for ftp. Going to this user's home dir gave us this
+This is another cred! I tried this on ssh and ftp, but it only worked for ftp. Going to this user's home dir gave us this
 "
 Hello Friend! I heard that you are looking for PumpkinGarden key. 
 But Key to the garden will be with LordPumpkin(ROOT user), don't worry, I know where LordPumpkin had placed the Key.
@@ -33,12 +33,12 @@ https://www.securityfocus.com/data/vulnerabilities/exploits/38362.sh
 The file is a simply written exploit (priv esc). Because ftp does not allow file uploads for these user (or execution at all), I 
 tried to login to ssh again. This time goblin's creds worked (must've typed them wrong last time) and we get a user shell.
 After hosting the exploit file on a webserver and uploading it to the host, I attempted to run it. The files had a tendency to 
-dissapear randomly (this was really odd) and that made this very difficult. I had to edit the upload file in the end to make it 
+disappear randomly (this was really odd) and that made this very difficult. I had to edit the upload file in the end to make it 
 work properly. In the end, it worked! I was able to read from the root dir, thus ending the challenge.
 
-This challenge presented many learning oportunities. First, I learned to redo enumeration when I reach a dead end. This was vital 
-to completing this challenge. I also shouldn't only rely on the nmap agro scan; a full port scan was needed. Second, I learned a 
-lot about the usefullness of creds. In challenges before now, I had hardly ever seen creds, let alone 2. Lastly, I learned to 
-practice and develop smaller skills. I mean this by the cryptography. Had I not done crypto challenges, I would have taken much 
-longer to finish the part with scarecrow's creds. My breif exposure to stego also allowed me to rule out looking within the ftp 
-files for more information.
+This challenge presented many learning opportunities. First, I learned to redo enumeration when I reach a dead end. This was 
+vital to completing this challenge. I also shouldn't only rely on the nmap agro scan; a full port scan was needed. Second, I 
+learned a lot about the usefulness of creds. In challenges before now, I had hardly ever seen creds, let alone 2. Lastly, I 
+learned to practice and develop smaller skills. I mean this by the cryptography. Had I not done crypto challenges, I would have 
+taken much longer to finish the part with scarecrow's creds. My brief exposure to stego also allowed me to rule out looking 
+within the ftp files for more information.
