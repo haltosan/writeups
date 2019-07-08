@@ -1,0 +1,17 @@
+"date","name","severity","service","target","desc","data","refs","hostnames"
+"7/6/2019","ssh-hostkey","info","(22/tcp) ssh","192.168.1.4","
+  1024 1a:de:2a:25:2c:cc:51:4b:7a:a0:e0:73:23:b9:3a:64 (DSA)
+  2048 f4:67:d3:d3:e5:24:c0:fc:c4:60:07:1c:1a:34:e9:54 (RSA)
+  256 10:ce:a1:ee:54:27:03:2d:a0:b1:dc:75:80:f2:db:8b (ECDSA)
+  256 6c:9d:b1:8d:ab:1f:3a:7c:e9:ad:bd:db:d8:81:d7:87 (ED25519)","","",""
+"7/6/2019","http-robots.txt","info","(80/tcp) http","192.168.1.4","23 disallowed entries (15 shown)
+/includes/ /scripts/ /js/ /secrets/ /css/ /themes/ 
+/CHANGELOG.txt /underconstruction.html /info.php /hidden/note.txt 
+/INSTALL.mysql.txt /seeds/seed.txt.gpg /js/hidden.js /comment/reply/ 
+/filter/tips/","","",""
+"7/6/2019","http-server-header","info","(80/tcp) http","192.168.1.4","Apache
+Output: 
+None: Apache","","",""
+"7/6/2019","http-title","info","(80/tcp) http","192.168.1.4","Mission-Pumpkin
+Output: 
+title: Mission-Pumpkin","","",""

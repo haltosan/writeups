@@ -1,0 +1,131 @@
+59 61 79 21 20 41 70 70 72 65 63 69 61 74 65 20 79 6f 75 72 20 70 61 74 69 65 6e 63 65 20 3a 29 0a 41 6c 6c 20 74 68 69 6e 67 73 20 61 72 65 20 64 69 66 66 69 63 75 6c 74 20 62 65 66 6f 72 65 20 74 68 65 79 20 62 65 63 6f 6d 65 20 65 61 73 79 2e 0a 41 63 6f 72 6e 20 50 75 6d 70 6b 69 6e 20 53 65 65 64 73 20 49 44 3a 20 39 36 34 35 34 0a 0a 44 6f 2c 20 72 65 6d 65 6d 62 65 72 20 74 6f 20 69 6e 66 6f 72 6d 20 4a 61 63 6b 20 74 6f 20 70 6c 61 6e 74 20 61 6c 6c 20 34 20 73 65 65 64 73 20 69 6e 20 74 68 65 20 73 61 6d 65 20 6f 72 64 65 72 2e
+packet hex?
+normal hex; decodes to:
+Yay! Appreciate your patience :)
+All things are difficult before they become easy.
+Acorn Pumpkin Seeds ID: 96454
+Do, remember to inform Jack to plant all 4 seeds in the same order.
+
+[id not ssh key]
+hinting that there is pass for something under acorn seeds?
+ F5ZWG4TJOB2HGL3TOB4S44DDMFYA==== 
+base64?
+decodes to unprintable chars
+second decode round gives:
+W4
+base32:
+/scripts/spy.pcap
+
+[not ssh key]
+
+found in pumkin.html
+
+forbidden:
+/seeds
+/images
+ VGhpcyBpcyBqdXN0IHRvIHJlbWFpbmQgeW91IHRoYXQgaXQncyBMZXZlbCAyIG9mIE1pc3Npb24tUHVtcGtpbiEgOyk= 
+base64?
+yes, decodes to:
+This is just to remaind you that it's Level 2 of Mission-Pumpkin! ;)
+
+found in index.html
+
+garden key from part 1:
+Q29uZ3JhdHVsYXRpb25zIQ==
+base64?
+decodes to:
+Congratulations!
+
+[not ssh key; not dir of webpage]
+in undercontrustion, there is a note saying:
+jackolantern dot GraphicsInterchangeFormat is under images
+
+the jackolantern.gif file doesn't have anything in the html, so metadata?
+no exif data or hidden files (binwalk).
+dirb scan showed robots.txt; robots.txt showed directories
+found in /hidden/note.txt:
+Robert : C@43r0VqG2=
+Mark : Qn@F5zMg4T
+goblin : 79675-06172-65206-17765
+79675061726520617765
+[ssh? no]
+[robert is base64? no, neither Mark is]
+[base64 decode]
+Z
+Bqy8
+
+found seed.txt.gpg in /seeds/seed.txt.gpg; need password to decrypt
+password found!: SEEDWATERSUNLIGHT
+output file:
+           
+                               _
+                              /\              )\
+                _           __)_)__        .'`--`'.
+                )\_      .-'._'-'_.'-.    /  ^  ^  \
+             .'`---`'. .'.' /o\'/o\ '.'.  \ \/\/\/ /...-_..
+            /  <> <>  \ : ._:  0  :_. : \  '------'       _J_..-_
+            |    A    |:   \\/\_/\//   : |     _/)_    .'`---`'.    ..-_
+'...    ..  \  <\_/>  / :  :\/\_/\/:  : /   .'`----`'./.'0\ 0\  \
+           _?_._`"`_.'`'-:__:__:__:__:-'   /.'<\   /> \:   o    |..-_
+        .'`---`'.``  _/(              /\   |:,___A___,|' V===V  /
+       /.'a . a  \.'`---`'.        __(_(__ \' \_____/ /'._____.'
+       |:  ___   /.'/\ /\  \    .-'._'-'_.'-:.______.' _?_            ..-.
+..-    \'  \_/   |:   ^    |  .'.' (o\'/o) '.'.     .'`"""`'.-...-_
+        '._____.'\' 'vvv'  / / :_/_:  A  :_\_: \   /   ^.^   \
+                  '.__.__.' | :   \'=...='/   : |  \  `===`  /
+         --                  \ :  :'.___.':  : /    `-------`
+                    -.        '-:__:__:__:__:-'..
+.._,'...-.._,'...-.._,'...-.._,'...-.._,'...-.._,'...-.._,'...-.._,'...-
+-.-- .. .--. .--. . . -.-.--
+                                -.-- --- ..-
+    .- .-. .
+                        --- -.
+                                                               - .... .
+       .-. .. --. .... -
+                     .--. .- - .... .-.-.- .-.-.- .-.-.-
+                            -... .. --. -- .- -..- .--. ..- -- .--. -.- .. -.
+... . . -.. ...
+                 .. -.. ---...
+                                    -.... ----. ..... ----- --...
+
+it's morse code (hint earlier):
+ T  T     I   E OF U   M N  YIPPEE! YOU ARE ON THE RIGHT PATH... BIGMAXPUMPKIN SEEDS ID: 69507    
+
+ID id 50609; jack be little pumpkin seeds
+
+running stegosuite on jackolanter.gif with the passwords from before (robert, mark) gave a decorative.txt file; it reads:
+Fantastic!!! looking forward for your presence in pumpkin party.
+Lil' Pump-Ke-Mon Pumpkin seeds ID : 86568
+
+big-max; jack-be-little; acorn; pump-ke-mon
+69507 - 50609 - 96454 - 86568
+69507-50609-96454-86568
+69507506099645486568
+[ssh key? yes! for user jack]
+can't ls; error
+-rbash: /usr/lib/command-not-found: restricted: cannot specify `/' in command names
+lsb_release -a
+cat /etc/lsb-release
+cat /etc/issue
+find *
+uname -a
+
+Distributor ID:	Ubuntu
+Description:	Ubuntu 14.04.6 LTS
+Release:	14.04
+Codename:	trusty
+
+used perl shell to bypass restrictions
+
+upgraded priv:
+sudo strace -o/dev/null /bin/bash
+
+read flag.txt:
+Congratulation! 
+Jack will take care of planting your seeds. 
+Hope to see you at Pumpkin Festival
+
+crypt:
+https://gchq.github.io/CyberChef/
+stego:
+stegosuite
