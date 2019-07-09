@@ -1,10 +1,10 @@
-This is part 2 of 3 in the mission pumpkin series on vulnhub. The sevices the system was running (I did a full port scan this time) can be 
-seen in the Faraday-SR-pumpkin_raising.csv file. I know that ssh is only going to be usefull after creds if it followed the pattern of the 
-last one. I checked out the website. The index.png file shows the main page. 'Screenshot from 2019-07-08 17-13-14.png' shows the base64 
-data hiding in the html comment. I also found what I thought was base64 in pumpkin.html (the png file shows the page). 'Screenshot from 
-2019-07-08 17-11-38.png' Shows the data on this page. In addition, 'Screenshot from 2019-07-08 17-11-50.png' shows hex data within the same 
-page. The last page I found was undercontruction (again, the png shows the page). 'Screenshot from 2019-07-08 17-11-18.png' shows a hint 
-for the jackolantern.gif file. Time to unpack this data.
+This is part 2 of 3 in the mission pumpkin series on vulnhub. The services the system was running (I did a full port scan this time) can 
+be seen in the Faraday-SR-pumpkin_raising.csv file. I know that ssh is only going to be useful after creds if it followed the pattern of 
+the last one. I checked out the website. The index.png file shows the main page. 'Screenshot from 2019-07-08 17-13-14.png' shows the 
+base64 data hiding in the html comment. I also found what I thought was base64 in pumpkin.html (the png file shows the page). 
+'Screenshot from 2019-07-08 17-11-38.png' Shows the data on this page. In addition, 'Screenshot from 2019-07-08 17-11-50.png' shows hex 
+data within the same page. The last page I found was undercontruction (again, the png shows the page). 'Screenshot from 2019-07-08 17-
+11-18.png' shows a hint for the jackolantern.gif file. Time to unpack this data.
 First, the hex from pumpkin.html decodes to
 "
 Yay! Appreciate your patience :)
@@ -20,44 +20,43 @@ We will visit the file later. The base64 on the main page decodes to
 "
 This is just to remaind you that it's Level 2 of Mission-Pumpkin! ;)
 "
-I thought that this meant the last flag from mission 1 was important. All it decoded to was "Congratulations!". Lastly, I checked the gif 
-for metadata or hidden files with binwalk. Neither worked. I then re-did enumneration to see if I missed anything.
-
-With a dirb scan, I found out that there was a robots.txt file (it was in my initial recon, I just missed it). The robots.txt file showed 
-many directories that looked interesting, but only 2 actually worked. It was the /hidden/note.txt dir. It read
+I thought that this meant the last flag from mission 1 was important. All it decoded to was "Congratulations!". Lastly, I checked the 
+gif for metadata or hidden files with binwalk. Neither worked. I then re-did enumeration to see if I missed anything.
+With a dirb scan, I found out that there was a robots.txt file (it was in my initial recon, I just missed it). The robots.txt file 
+showed many directories that looked interesting, but only 2 actually worked. It was the /hidden/note.txt dir. It read
 "
 Robert : C@43r0VqG2=
 Mark : Qn@F5zMg4T
 goblin : 79675-06172-65206-17765
 "
-After trying (and failing) to use the creds on ssh, I decided to move on to the other directories. We got a file /seeds/seed.txt.gpg and to 
-be honest, I had to look up how to read the file. It was a password locked pgp file. The Robert, Mark, and goblin creds all failed, but on 
-the main webpage, the words 'SEEDWATERSUNLIGHT' worked. This outputted an ASCII art image of several pumpkins. On the pumpkin.html page, a 
-reference to Morse was made, and there was plenty of lines and dots, so I tried the text and got
+After trying (and failing) to use the creds on ssh, I decided to move on to the other directories. We got a file /seeds/seed.txt.gpg and 
+to be honest, I had to look up how to read the file. It was a password locked pgp file. The Robert, Mark, and goblin creds all failed, 
+but on the main webpage, the words 'SEEDWATERSUNLIGHT' worked. This outputted an ASCII art image of several pumpkins. On the 
+pumpkin.html page, a reference to Morse was made, and there was plenty of lines and dots, so I tried the text and got
 "
 YIPPEE! YOU ARE ON THE RIGHT PATH... BIGMAXPUMPKIN SEEDS ID: 69507
 "
-Now I turned to the pcap file I got earlier. It was a conversation (look in the conversation dir) betweek jack and some other people, but 
-the important part is ther was annother seed id 50609; jack be little pumpkin seeds. Now all that we have to do is to find the last of the 
-4, most likely in the image.
-I had to grab a tool I never used before (stegosuite) and run the most likely commands to get data from this image. This is were I finally 
-used the hidden note creds. Mark's worked, and we got a decorative.txt file that read
+Now I turned to the pcap file I got earlier. It was a conversation (look in the conversation dir) between jack and some other people, 
+but the important part is there was another seed id 50609; jack be little pumpkin seeds. Now all that we have to do is to find the last 
+of the 4, most likely in the image. I had to grab a tool I never used before (stegosuite) and run the most likely commands to get data 
+from this image. This is where I finally used the hidden note creds. Mark's worked, and we got a decorative.txt file that read
 "
 Fantastic!!! looking forward for your presence in pumpkin party.
 Lil' Pump-Ke-Mon Pumpkin seeds ID : 86568
 "
-The hex hint with the first ID said that jack should plant the seeds in order. My thought here was that the order was the order in the main 
-page of the site. Also, the goblin cred hasn't been used, and it's a string of 4 numbers, 5 digits each, just like the ids. The order should 
-then be: big-max; jack-be-little; acorn; pump-ke-mon. I tried the ssh service under jack with the password 69507506099645486568, and we got 
-a user shell!
-This shell is very restriced. No redirects, no dir change, can't even list files in the current dir. I used a reverse shell to gain acces on 
-a different port. This allowed me to find out the Ububntu and kernel version. I then moved to exploit-db for anything that would work on the 
-system for priv esc. None of the modules worked. After some research, I attempted to see if there were any commands I had priv on. The only 
-command I could run sudo was strace. I abused my priv on this command to get root. It was then a simple matter of moving to the root dir and 
-reading the flag.
-I learned that I positivly hate priv esc, because there is no one way or simple approach. The rbash shell was also painfull to use, but from 
-annother challenge I learned to chain shells to bypass this. The hardest part was the stego. I had little to no practice in this, so I did a 
-lot of research to complete this part of the challenge. The crypto was also hard, but was manageable after I looked back at the hints.
+The hex hint with the first ID said that jack should plant the seeds in order. My thought here was that the order was the order in the 
+main page of the site. Also, the goblin cred hasn't been used, and it's a string of 4 numbers, 5 digits each, just like the ids. The 
+order should then be: big-max; jack-be-little; acorn; pump-ke-mon. I tried the ssh service under jack with the password 
+69507506099645486568, and we got a user shell! This shell is very restricted. No redirects, no dir change, can't even list files in the 
+current dir. I used a reverse shell to gain access on a different port. This allowed me to find out the Ubuntu and kernel version. I 
+then moved to exploit-db for anything that would work on the system for priv esc. None of the modules worked. After some research, I 
+attempted to see if there were any commands I had priv on. The only command I could run sudo was strace. I abused my priv on this 
+command to get root. It was then a simple matter of moving to the root dir and reading the flag.
+
+I learned that I positively hate priv esc, because there is no one way or simple approach. The rbash shell was also painful to use, but 
+from another challenge I learned to chain shells to bypass this. The hardest part was the stego. I had little to no practice in this, so 
+I did a lot of research to complete this part of the challenge. The crypto was also hard but was manageable after I looked back at the 
+hints.
 
 References:
 -priv esc
